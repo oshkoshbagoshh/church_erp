@@ -1,39 +1,23 @@
-from flask import Flask, render_template
-from flask_debugtoolbar import DebugToolbarExtension
+#!/usr/bin/env python
+"""Main application module."""
+import os
+from app import create_app
+from app.commands import register_commands
+from app.extensions import db
 
+app = create_app()
+register_commands(app)
 
-app = Flask(__name__)
-
-app.config["DEBUG"] = True
-
-name = "Pai Church ERP"
-
-app.config["SECRET_KEY"] = "secret key"  # TODO: replace with actual key
-
-toolbar = DebugToolbarExtension(app)
-
-# index view
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-
-
-
-
-# sandbox
-@app.route("/sandbox")
-def sandbox():
-    return render_template("sandbox.html")
-
-
-# dashboard view
-@app.route("/dashboard")
-def dashboard():
-    return render_template("dashboard.html")
-
-
+@app.shell_context_processor
+def make_shell_context():
+    """Configure flask shell command to automatically import common objects."""
+    return {
+        "db": db,
+        "app": app,
+    }
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    host = os.environ.get("FLASK_HOST", "127.0.0.1")
+    port = int(os.environ.get("FLASK_PORT", 5000))
+    app.run(host=host, port=port)
 

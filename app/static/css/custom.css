@@ -1,0 +1,60 @@
+/* Custom styles */
+.sidebar {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.sidebar .nav-link {
+    color: #333;
+    padding: 0.5rem 1rem;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #e9ecef;
+}
+
+.sidebar .nav-link.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.dashboard-card {
+    transition: transform 0.2s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Custom utility classes */
+.bg-light-blue {
+    background-color: #e3f2fd;
+}
+
+.text-primary-dark {
+    color: #0043a4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        min-height: auto;
+    }
+    
+    .dashboard-stats {
+        margin-top: 1rem;
+    }
+}
+
+/* Vendor management specific styles */
+.vendor-card {
+    border-left: 4px solid #0d6efd;
+}
+
+.vendor-card.active {
+    border-left-color: #198754;
+}
+
+.vendor-card.inactive {
+    border-left-color: #dc3545;
+}
